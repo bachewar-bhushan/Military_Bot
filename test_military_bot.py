@@ -142,26 +142,31 @@ def video_feed():
     <head>
         <title>Live Stream</title>
         <style>
-            body {
+            html, body {
                 margin: 0;
                 padding: 0;
+                height: 100%;
+                background-color: black;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100vh;
-                background-color: black;
             }
 
             #video-container {
                 position: relative;
-                display: inline-block;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                background-color: black;
             }
 
             #stream {
-                max-width: 100%;
-                height: auto;
-                border: 2px solid #fff;
-                border-radius: 8px;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
 
             .fullscreen-button {
@@ -175,6 +180,7 @@ def video_feed():
                 cursor: pointer;
                 font-size: 16px;
                 font-weight: bold;
+                z-index: 1000;
             }
 
             .fullscreen-button:hover {
@@ -190,15 +196,27 @@ def video_feed():
 
         <script>
             function goFullscreen() {
-                const elem = document.getElementById("video-container");
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) {
-                    elem.webkitRequestFullscreen(); // Safari
-                } else if (elem.msRequestFullscreen) {
-                    elem.msRequestFullscreen(); // IE11
+                const container = document.getElementById("video-container");
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen(); // Safari
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen(); // IE11
                 }
             }
+
+            // Optional: Resize image to container
+            document.addEventListener("fullscreenchange", () => {
+                const img = document.getElementById("stream");
+                if (document.fullscreenElement) {
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                } else {
+                    img.style.width = "";
+                    img.style.height = "";
+                }
+            });
         </script>
     </body>
     </html>
