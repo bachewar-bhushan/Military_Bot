@@ -121,12 +121,9 @@ def index():
           background-color: #a71d2a;
         }
         .page-heading {
-            position: absolute;
-            top: 0;
             width: 100%;
             text-align: center;
-            margin: 0;
-            padding: 10px 0;
+            margin-bottom: 20px;
             font-size: 24px;
             color: white;
             font-weight: bold;
@@ -141,9 +138,7 @@ def index():
 
     <body>
     <h1 class="page-heading">Ground Bot for Military Reconnaissance</h1>
-
-     
-      <form action="/shutdown" method="POST">
+    <form action="/shutdown" method="POST">
         <button class="shutdown" type="submit">Shutdown Raspberry Pi</button>
       </form>
       <div class="container">
