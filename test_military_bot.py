@@ -194,6 +194,7 @@ def video_feed():
 
             #video-container {
               position: relative;
+              border-radius: 25px;
                 width: 100%;
                 height: 100%;
                 background-color: black;
@@ -326,7 +327,8 @@ def object_detection_feed():
             }
 
             #video-container {
-                 position: relative;
+                    border-radius: 25px;
+                    position: relative;
                     width: 100%;
                     height: 100%;
                     background-color: black;
@@ -365,8 +367,8 @@ def object_detection_feed():
                 position: absolute;
                 top: 10px;
                 left: 10px;
-                width: 250px;
-                height: 200px;
+                width: 300px;
+                height: 250px;
                 z-index: 999;
                 border: 2px solid #007bff;
                 border-radius: 10px;
