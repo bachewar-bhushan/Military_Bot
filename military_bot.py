@@ -585,13 +585,14 @@ def shutdown():
         print("Camera stop error:", e)
 
     shutdown_func = request.environ.get('werkzeug.server.shutdown')
+    GPIO.output(buzzer, GPIO.HIGH)
+    time.sleep(0.8)
+    GPIO.output(buzzer, GPIO.LOW)
+    time.sleep(0.2)
     if shutdown_func:
         shutdown_func()
 
-        GPIO.output(buzzer, GPIO.HIGH)
-        time.sleep(0.8)
-        GPIO.output(buzzer, GPIO.LOW)
-        time.sleep(0.2)
+
     threading.Thread(target=lambda: os.system("sudo shutdown now")).start()
     return "Shutting down..."
 
