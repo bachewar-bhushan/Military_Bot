@@ -578,17 +578,14 @@ def shutdown():
     try:
         picam2.stop()
         GPIO.output(buzzer, GPIO.HIGH)
-        time.sleep(0.2)
+        time.sleep(0.8)
         GPIO.output(buzzer, GPIO.LOW)
         time.sleep(0.2)
     except Exception as e:
         print("Camera stop error:", e)
 
     shutdown_func = request.environ.get('werkzeug.server.shutdown')
-    GPIO.output(buzzer, GPIO.HIGH)
-    time.sleep(0.8)
-    GPIO.output(buzzer, GPIO.LOW)
-    time.sleep(0.2)
+ 
     if shutdown_func:
         shutdown_func()
 
