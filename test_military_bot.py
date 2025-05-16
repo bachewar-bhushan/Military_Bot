@@ -142,6 +142,8 @@ def video_feed():
     <html>
     <head>
         <title>Live Stream</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <style>
             html, body {
                 margin: 0;
@@ -155,12 +157,8 @@ def video_feed():
 
             #video-container {
                 position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
                 width: 100%;
                 height: 100%;
-                overflow: hidden;
                 background-color: black;
             }
 
@@ -187,12 +185,24 @@ def video_feed():
             .fullscreen-button:hover {
                 background: rgba(200, 200, 200, 0.9);
             }
+
+            #map {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 300px;
+                height: 200px;
+                z-index: 999;
+                border: 2px solid #007bff;
+                border-radius: 10px;
+            }
         </style>
     </head>
     <body>
         <div id="video-container">
             <img id="stream" src="/video_feed/stream" alt="Live Feed">
             <button class="fullscreen-button" onclick="goFullscreen()">🔲 Full Screen</button>
+            <div id="map"></div>
         </div>
 
         <script>
@@ -207,7 +217,6 @@ def video_feed():
                 }
             }
 
-            // Optional: Resize image to container
             document.addEventListener("fullscreenchange", () => {
                 const img = document.getElementById("stream");
                 if (document.fullscreenElement) {
@@ -218,11 +227,22 @@ def video_feed():
                     img.style.height = "";
                 }
             });
+
+            // Leaflet map logic
+            const map = L.map('map').setView([18.46374, 73.86834], 13); // 🔁 Replace with your lat, lon
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+            L.marker([18.46374, 73.86834]) // 🔁 Replace with your lat, lon
+                .addTo(map)
+                .bindPopup('Bot Location')
+                .openPopup();
         </script>
     </body>
     </html>
     '''
     return render_template_string(html)
+
 
 
 
