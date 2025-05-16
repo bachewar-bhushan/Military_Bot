@@ -344,7 +344,7 @@ def object_detection_feed():
 
             .fullscreen-button {
                 position: absolute;
-                top: 50%;
+                top: 10px;
                 left: 50%;
                 transform: translateX(-50%);
                 padding: 10px 15px;
