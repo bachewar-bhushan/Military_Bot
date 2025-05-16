@@ -69,7 +69,7 @@ def index():
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Stream Options</title>
+      <title>MilitaryBot</title>
       <style>
         html, body {
           height: 100%;
@@ -123,6 +123,7 @@ def index():
       </style>
     </head>
     <body>
+     <h1>Ground Bot for Military Reconnaissance</h1>
       <form action="/shutdown" method="POST">
         <button class="shutdown" type="submit">Shutdown Raspberry Pi</button>
       </form>
