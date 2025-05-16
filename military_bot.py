@@ -70,6 +70,8 @@ def index():
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Stream Options</title>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
       <style>
         html, body {
           height: 100%;
@@ -85,7 +87,6 @@ def index():
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
           font-family: Arial, sans-serif;
           color: black;
         }
@@ -94,7 +95,7 @@ def index():
           display: flex;
           justify-content: center;
           gap: 40px;
-          margin-top: 40px;
+          margin-top: 20px;
         }
 
         button {
@@ -114,11 +115,19 @@ def index():
 
         .shutdown {
           background-color: #dc3545;
-          margin-bottom: 20px;
+          margin: 20px 0;
         }
 
         .shutdown:hover {
           background-color: #a71d2a;
+        }
+
+        #map {
+          width: 80vw;
+          height: 400px;
+          margin: 20px auto;
+          border: 2px solid #007bff;
+          border-radius: 10px;
         }
       </style>
     </head>
@@ -126,14 +135,31 @@ def index():
       <form action="/shutdown" method="POST">
         <button class="shutdown" type="submit">Shutdown Raspberry Pi</button>
       </form>
+
       <div class="container">
         <button onclick="location.href='/video_feed'">Live Stream</button>
         <button onclick="location.href='/object_detection'">Object Detection</button>
       </div>
+
+      <div id="map"></div>
+
+      <script>
+        const map = L.map('map').setView([19.0760, 72.8777], 13);  // 🔁 Replace with your latitude, longitude
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([19.0760, 72.8777])  // 🔁 Replace with your latitude, longitude
+          .addTo(map)
+          .bindPopup('Bot Location')
+          .openPopup();
+      </script>
     </body>
     </html>
     '''
     return render_template_string(html)
+
 @app.route('/video_feed')
 def video_feed():
     def generate():
