@@ -122,8 +122,10 @@ def index():
         }
       </style>
     </head>
+<h1 style="color: white; font-weight: bold; font-style: italic;">Ground Bot for Military Reconnaissance</h1>
+
     <body>
-     <h1>Ground Bot for Military Reconnaissance</h1>
+     
       <form action="/shutdown" method="POST">
         <button class="shutdown" type="submit">Shutdown Raspberry Pi</button>
       </form>
@@ -190,7 +192,7 @@ def video_feed():
                 position: absolute;
                 top: 10px;
                 left: 10px;
-                width: 300px;
+                width: 200px;
                 height: 200px;
                 z-index: 999;
                 border: 2px solid #007bff;
