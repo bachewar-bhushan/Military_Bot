@@ -165,7 +165,7 @@ def video_feed():
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <style>
             html, body {
-                    background-image: url('/static/home.jpg');
+                    background-image: url('/static/como.jpg');
                    .home-button {
                     position: absolute;
                     top: 10px;
@@ -193,22 +193,27 @@ def video_feed():
             }
 
             #video-container {
-                position: relative;
+              position: relative;
                 width: 100%;
                 height: 100%;
                 background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             #stream {
-                width: 100%;
-                height: 100%;
+                max-width: 100%;
+                max-height: 100%;
                 object-fit: contain;
+                display: block;
             }
 
             .fullscreen-button {
                 position: absolute;
-                top: 50%;
-                right: 50%;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
                 padding: 10px 15px;
                 background: rgba(255, 255, 255, 0.8);
                 border: none;
@@ -293,7 +298,7 @@ def object_detection_feed():
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <style>
             html, body {
-                    background-image: url('/static/home.jpg');
+                    background-image: url('/static/como.jpg');
                    .home-button {
                     position: absolute;
                     top: 10px;
@@ -321,16 +326,20 @@ def object_detection_feed():
             }
 
             #video-container {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                background-color: black;
+                 position: relative;
+                    width: 100%;
+                    height: 100%;
+                    background-color: black;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
             }
 
             #stream {
-                width: 100%;
-                height: 100%;
+                max-width: 100%;
+                max-height: 100%;
                 object-fit: contain;
+                display: block;
             }
 
             .fullscreen-button {
