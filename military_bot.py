@@ -71,8 +71,15 @@ def index():
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Stream Options</title>
       <style>
-          background-image: url('home.jpg');/* Put your image in the same directory with this name */
-          background-size: auto;
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          background-image: url('/static/home.jpg');
+          background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
           display: flex;
@@ -81,6 +88,7 @@ def index():
           justify-content: center;
           font-family: Arial, sans-serif;
           color: black;
+        }
 
         .container {
           display: flex;
@@ -88,7 +96,7 @@ def index():
           gap: 40px;
           margin-top: 40px;
         }
-        
+
         button {
           padding: 15px 30px;
           font-size: 18px;
@@ -99,13 +107,16 @@ def index():
           border-radius: 6px;
           transition: background-color 0.3s ease;
         }
+
         button:hover {
           background-color: #0056b3;
         }
+
         .shutdown {
           background-color: #dc3545;
           margin-bottom: 20px;
         }
+
         .shutdown:hover {
           background-color: #a71d2a;
         }
