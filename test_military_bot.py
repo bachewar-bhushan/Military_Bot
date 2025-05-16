@@ -5,10 +5,13 @@ import time
 import os
 from ultralytics import YOLO
 from queue import Queue
+import RPi.GPIO as GPIO
 from picamera2 import Picamera2
 
 app = Flask(__name__)
 picam2 = Picamera2()
+
+
 
 # Camera configuration
 video_config = picam2.create_video_configuration(
@@ -18,7 +21,7 @@ video_config = picam2.create_video_configuration(
 picam2.configure(video_config)
 picam2.preview_configuration.main.format = "RGB888"
 picam2.configure("preview")
-
+buzzer = 23
 #picam2.set_controls({
  #   "AwbMode": 1,
   #  "Brightness": 0.0,
@@ -26,6 +29,14 @@ picam2.configure("preview")
   #  "Saturation": 1.3,
    # "Sharpness": 1.0
 #})
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(buzzer, GPIO.OUT)
+for i in range (3):
+    GPIO.output(buzzer, GPIO.HIGH)
+    time.sleep(0.2)
+    GPIO.output(buzzer, GPIO.LOW)
+    time.sleep(0.2)
 
 picam2.start()
 
@@ -470,6 +481,10 @@ def set_control():
 def shutdown():
     try:
         picam2.stop()
+        GPIO.output(buzzer, GPIO.HIGH)
+        time.sleep(0.8)
+        GPIO.output(buzzer, GPIO.LOW)
+        time.sleep(0.2)
     except Exception as e:
         print("Camera stop error:", e)
 
