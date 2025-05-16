@@ -122,7 +122,8 @@ def index():
         }
       </style>
     </head>
-<h1 style="color: white; font-weight: bold; font-style: italic;">Ground Bot for Military Reconnaissance</h1>
+<h1 style="color: white; font-weight: bold; font-style: italic; text-align: center; margin-top: 20px;">Ground Bot for Military Reconnaissance</h1>
+
 
     <body>
      
@@ -148,6 +149,17 @@ def video_feed():
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <style>
             html, body {
+
+                button {
+                padding: 15px 30px;
+                font-size: 18px;
+                cursor: pointer;
+                border: none;
+                background-color: #007bff;
+                color: white;
+                border-radius: 6px;
+                transition: background-color 0.3s ease;
+                }
                 margin: 0;
                 padding: 0;
                 height: 100%;
@@ -205,7 +217,7 @@ def video_feed():
         <div id="video-container">
             <img id="stream" src="/video_feed/stream" alt="Live Feed">
             <button class="fullscreen-button" onclick="goFullscreen()">🔲 Full Screen</button>
-           
+            <button onclick="location.href='/'">Live Stream</button>
         </div>
 
         <script>
