@@ -120,12 +120,29 @@ def index():
         .shutdown:hover {
           background-color: #a71d2a;
         }
+        .page-heading {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 10px 0;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            font-style: italic;
+            background-color: rgba(0, 0, 0, 0.5); /* optional dark strip behind text */
+            z-index: 1001;
+        }
+
       </style>
     </head>
-<h1 style="color: white; font-weight: bold; font-style: italic; text-align: center; margin-top: 20px;">Ground Bot for Military Reconnaissance</h1>
+
 
 
     <body>
+    <h1 class="page-heading">Ground Bot for Military Reconnaissance</h1>
+
      
       <form action="/shutdown" method="POST">
         <button class="shutdown" type="submit">Shutdown Raspberry Pi</button>
