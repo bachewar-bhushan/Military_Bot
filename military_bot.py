@@ -70,8 +70,8 @@ def index():
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Stream Options</title>
       <style>
-                  background-image: url('/static/background.jpg');  /* Put your image in the same directory with this name */
-          background-size: cover;
+                  background-image: url('home.jpg');  /* Put your image in the same directory with this name */
+          background-size: auto;
           background-position: center;
           background-repeat: no-repeat;
           display: flex;
@@ -79,7 +79,7 @@ def index():
           align-items: center;
           justify-content: center;
           font-family: Arial, sans-serif;
-          color: white;
+          color: black;
 
         .container {
           display: flex;
