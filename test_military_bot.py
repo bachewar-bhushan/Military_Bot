@@ -283,7 +283,7 @@ def video_feed():
     return render_template_string(html)
 
 @app.route('/object_detection')
-def video_feed():
+def object_detection_feed():
     html = '''
     <!DOCTYPE html>
     <html>
