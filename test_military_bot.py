@@ -484,7 +484,7 @@ def shutdown():
         GPIO.output(buzzer, GPIO.HIGH)
         time.sleep(0.8)
         GPIO.output(buzzer, GPIO.LOW)
-        time.sleep(0.2)
+        time.sleep(0.8)
     except Exception as e:
         print("Camera stop error:", e)
 
