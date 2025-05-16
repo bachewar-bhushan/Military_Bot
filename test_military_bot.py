@@ -150,15 +150,22 @@ def video_feed():
         <style>
             html, body {
 
-                button {
-                padding: 15px 30px;
-                font-size: 18px;
-                cursor: pointer;
-                border: none;
-                background-color: #007bff;
-                color: white;
-                border-radius: 6px;
-                transition: background-color 0.3s ease;
+                .home-button {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    padding: 10px 15px;
+                    background: rgba(255, 255, 255, 0.85);
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: bold;
+                    z-index: 1001;
+                }
+
+                .home-button:hover {
+                    background: rgba(200, 200, 200, 0.95);
                 }
                 margin: 0;
                 padding: 0;
@@ -217,7 +224,8 @@ def video_feed():
         <div id="video-container">
             <img id="stream" src="/video_feed/stream" alt="Live Feed">
             <button class="fullscreen-button" onclick="goFullscreen()">🔲 Full Screen</button>
-            <button onclick="location.href='/'">Live Stream</button>
+            <button class="home-button" onclick="location.href='/'">Home</button>
+
         </div>
 
         <script>
