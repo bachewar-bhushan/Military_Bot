@@ -228,7 +228,7 @@ def video_feed():
                 position: absolute;
                 top: 10px;
                 left: 10px;
-                width: 200px;
+                width: 250px;
                 height: 200px;
                 z-index: 999;
                 border: 2px solid #007bff;
