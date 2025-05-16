@@ -199,10 +199,11 @@ def video_feed():
         </style>
     </head>
     <body>
+     <div id="map"></div>
         <div id="video-container">
             <img id="stream" src="/video_feed/stream" alt="Live Feed">
             <button class="fullscreen-button" onclick="goFullscreen()">🔲 Full Screen</button>
-            <div id="map"></div>
+           
         </div>
 
         <script>
