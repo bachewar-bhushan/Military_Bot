@@ -142,90 +142,69 @@ def video_feed():
     <head>
         <title>Live Stream</title>
         <style>
-            html, body {
+            body {
                 margin: 0;
                 padding: 0;
-                height: 100%;
-                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
                 background-color: black;
             }
 
             #video-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 80%;
+                position: relative;
+                display: inline-block;
             }
 
             #stream {
                 max-width: 100%;
-                max-height: 100%;
-                border: 4px solid white;
+                height: auto;
+                border: 2px solid #fff;
                 border-radius: 8px;
             }
 
-            .controls {
+            .fullscreen-button {
                 position: absolute;
-                bottom: 10px;
-                width: 100%;
-                text-align: center;
-                background-color: rgba(0, 0, 0, 0.7);
-                padding: 10px;
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+                background: rgba(255, 255, 255, 0.8);
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: bold;
             }
 
-            .controls label {
-                color: white;
-                margin: 0 15px;
-                font-family: sans-serif;
-            }
-
-            input[type=range] {
-                width: 200px;
+            .fullscreen-button:hover {
+                background: rgba(200, 200, 200, 0.9);
             }
         </style>
     </head>
     <body>
         <div id="video-container">
-            <img id="stream" src="/video_feed/stream">
-        </div>
-
-        <div class="controls">
-            <label>Focus:
-                <input type="range" min="0" max="100" value="0" id="focusSlider">
-            </label>
-            <label>Brightness:
-                <input type="range" min="-1" max="1" step="0.1" value="0" id="brightnessSlider">
-            </label>
-            <label>Contrast:
-                <input type="range" min="0" max="2" step="0.1" value="1" id="contrastSlider">
-            </label>
+            <img id="stream" src="/video_feed/stream" alt="Live Feed">
+            <button class="fullscreen-button" onclick="goFullscreen()">🔲 Full Screen</button>
         </div>
 
         <script>
-            function sendControl(control, value) {
-                fetch('/set_control', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ control: control, value: parseFloat(value) })
-                });
+            function goFullscreen() {
+                const elem = document.getElementById("video-container");
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen(); // Safari
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen(); // IE11
+                }
             }
-
-            document.getElementById('focusSlider').addEventListener('input', function () {
-                sendControl('LensPosition', this.value);
-            });
-
-            document.getElementById('brightnessSlider').addEventListener('input', function () {
-                sendControl('Brightness', this.value);
-            });
-
-            document.getElementById('contrastSlider').addEventListener('input', function () {
-                sendControl('Contrast', this.value);
-            });
         </script>
     </body>
     </html>
     '''
     return render_template_string(html)
+
 
 
 @app.route('/object_detection')
