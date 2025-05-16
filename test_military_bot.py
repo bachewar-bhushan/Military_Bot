@@ -131,7 +131,6 @@ def index():
             color: white;
             font-weight: bold;
             font-style: italic;
-            background-color: rgba(0, 0, 0, 0.5); /* optional dark strip behind text */
             z-index: 1001;
         }
 
@@ -166,8 +165,8 @@ def video_feed():
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <style>
             html, body {
-
-                .home-button {
+                    background-image: url('/static/home.jpg');
+                   .home-button {
                     position: absolute;
                     top: 10px;
                     right: 10px;
@@ -208,8 +207,8 @@ def video_feed():
 
             .fullscreen-button {
                 position: absolute;
-                top: 10px;
-                right: 10px;
+                top: 50%;
+                right: 50%;
                 padding: 10px 15px;
                 background: rgba(255, 255, 255, 0.8);
                 border: none;
@@ -283,10 +282,138 @@ def video_feed():
     '''
     return render_template_string(html)
 
-
-
-
 @app.route('/object_detection')
+def video_feed():
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Live Stream</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <style>
+            html, body {
+                    background-image: url('/static/home.jpg');
+                   .home-button {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    padding: 10px 15px;
+                    background: rgba(255, 255, 255, 0.85);
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: bold;
+                    z-index: 1001;
+                }
+
+                .home-button:hover {
+                    background: rgba(200, 200, 200, 0.95);
+                }
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #video-container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+            }
+
+            #stream {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .fullscreen-button {
+                position: absolute;
+                top: 50%;
+                right: 50%;
+                padding: 10px 15px;
+                background: rgba(255, 255, 255, 0.8);
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: bold;
+                z-index: 1000;
+            }
+
+            .fullscreen-button:hover {
+                background: rgba(200, 200, 200, 0.9);
+            }
+
+            #map {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 250px;
+                height: 200px;
+                z-index: 999;
+                border: 2px solid #007bff;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+     <div id="map"></div>
+        <div id="video-container">
+            <img id="stream" src="/object_detection/stream" alt="Live Feed">
+            <button class="fullscreen-button" onclick="goFullscreen()">🔲 Full Screen</button>
+            <button class="home-button" onclick="location.href='/'">Home</button>
+
+        </div>
+
+        <script>
+            function goFullscreen() {
+                const container = document.getElementById("video-container");
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen(); // Safari
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen(); // IE11
+                }
+            }
+
+            document.addEventListener("fullscreenchange", () => {
+                const img = document.getElementById("stream");
+                if (document.fullscreenElement) {
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+                } else {
+                    img.style.width = "";
+                    img.style.height = "";
+                }
+            });
+
+            // Leaflet map logic
+            const map = L.map('map').setView([18.46374, 73.86834], 13); // 🔁 Replace with your lat, lon
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+            L.marker([18.46374, 73.86834]) // 🔁 Replace with your lat, lon
+                .addTo(map)
+                .bindPopup('Bot Location')
+                .openPopup();
+        </script>
+    </body>
+    </html>
+    '''
+    return render_template_string(html)
+
+
+
+
+@app.route('/object_detection/stream')
 def object_detection():
     def generate():
         while True:
